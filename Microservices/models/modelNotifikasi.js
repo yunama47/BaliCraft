@@ -1,0 +1,22 @@
+import mongoose from "mongoose";
+
+const Notifikasi = mongoose.Schema({
+    judul:{
+        type: String,
+        require: true
+    },
+    pesan:{
+        type: String,
+        require: true
+    },
+    link_ref:{
+        type: String,
+    },
+    read:{
+        type: Boolean,
+    }
+},{
+    timestamps: true
+})
+
+export default mongoose.model("Notifikasi",Notifikasi)
