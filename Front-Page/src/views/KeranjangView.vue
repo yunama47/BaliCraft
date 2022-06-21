@@ -48,7 +48,7 @@
                   <!-- <td>{{ keranjang.keterangan ? keranjang.keterangan : "-"}}</td> -->
                   <td>{{ keranjang.jumlah }}</td>
                   <td>Rp. {{ keranjang.products.harga }}</td>
-                  <td>Rp. {{ keranjang.products.harga*keranjang.jumlah_pemesanan }}</td>
+                  <td>Rp. {{ keranjang.products.harga * keranjang.jumlah }}</td>
                   <td class="text-danger">
                     <b-icon-trash @click="hapusKeranjang(keranjang._id)"></b-icon-trash>
                   </td>
@@ -110,7 +110,7 @@ export default {
   computed: {
     totalHarga(){
         return this.keranjangs.reduce(function(items, data) {
-            return items+(data.products.harga*data.jumlah_pemesanan)
+            return items+(data.products.harga*data.jumlah)
         }, 0)
     }
   }
