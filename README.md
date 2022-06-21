@@ -10,6 +10,10 @@
 * **Arsitektur Terdistribusi** | Database untuk microservice menggunakan mongodb cloud region cluster GCP / Jakarta (asia-southeast2). Sistem file menggunakan google api untuk mengupload file gambar ke google drive.
 * **Microservice** | Sistem notifikasi dan keranjang belanja terpisah dari aplikasi laravel dan dibuat dengan expressjs.
 ---
+## Pembagian Tugas Kelompok
+* Wahyu : Membuat Aplikasi Back-Page dan notifikasi
+* Nicko : Membuat Aplikasi Front-Page dan keranjang belanja
+---
 ## Catatan untuk menjalankan sistem
 download : php ,nodejs, composer dan xampp
 ### Back-Page
