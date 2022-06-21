@@ -20,7 +20,8 @@ download : php ,nodejs, composer dan xampp
 * `cd Back-Page`
 * `composer install`
 * `npm install && npm run dev`
-* *setting database*
+* rename `.env copy` menjadi `.env` 
+* ubah setingan di `config\database.php`
 * `php artisan serve`
 ### Front-Page
 * `cd Front-Page`
