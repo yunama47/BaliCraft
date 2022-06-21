@@ -78,20 +78,20 @@
 export default {
     data() {
     return {
-        judul:'',
+        judul:undefined,
         errors: [],
         allerros: [],
         success: false,
-        message: '',
+        message: undefined,
         pengrajins:{},
-        nama_barang:'',
-        bahan:'',
-        harga:'',
-        keterangan:'',
-        id_peng:'',
-        id_brg:'',
-        gambar:'',
-        link_gambar:'',
+        nama_barang:undefined,
+        bahan:undefined,
+        harga:undefined,
+        keterangan:undefined,
+        id_peng:undefined,
+        id_brg:undefined,
+        gambar:undefined,
+        link_gambar:undefined,
         list_bahan:[],
         editorConfig: {
             toolbarGroups: [{
@@ -185,11 +185,11 @@ export default {
             formData.append('keterangan', this.keterangan);
             formData.append('id_peng', this.id_peng);
             formData.append('gambar', this.gambar);
-            formData.append('link_gambar', this.link_gambar);
             this.$swal.showLoading()
             // edit data 
             if (this.$route.params.id) {
                 formData.append('id_brg',this.id_brg)
+                formData.append('link_gambar', this.link_gambar);
                 this.axios.post('/api/barang/'+this.$route.params.id, formData,{
                     headers: {
                         'content-type': 'multipart/form-data'

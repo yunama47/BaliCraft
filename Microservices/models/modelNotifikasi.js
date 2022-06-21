@@ -9,8 +9,9 @@ const Notifikasi = mongoose.Schema({
         type: String,
         require: true
     },
-    link_ref:{
+    id_keranjang:{
         type: String,
+        require: true
     },
     read:{
         type: Boolean,

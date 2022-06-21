@@ -41,11 +41,13 @@
             <h3>Notifikasi</h3>
             <hr>
             <span v-show="!err_notif.status" v-for="x in notifikasi" class="bg-blue-600 hover:bg-blue-400 mx-2 my-1 pt-1 pl-3 rounded-lg shadow-lg ">
-                <a :href="x.link_ref" target="_blank" @click="bacaNotif(x._id)" class="text-white no-underline">
-                    <h4>{{x.judul}}</h4> 
-                    <p>{{x.pesan}} </p>
-                </a>
-                <span v-if="x.read" class="rounded-lg px-3 bg-green-600 "><i class="fas fa-check-circle"></i></span>
+                <router-link :to="{name:'order' ,params: {id:x.id_keranjang}}" class="text-white no-underline">
+                    <div @click="bacaNotif(x._id)">
+                        <h4>{{x.judul}}</h4> 
+                        <p>{{x.pesan}} </p>
+                    </div>
+                </router-link>
+                <span v-if="x.read" class="rounded-lg px-3 bg-green-600 ">read<i class="fas fa-check-circle"></i></span>
                 <button @click="delNotif(x._id)" class="float-right rounded-lg px-3 bg-red-600 hover:bg-red-400"><i class="fas fa-minus-circle"></i></button>   
             </span>
             <span v-show="err_notif.status" class="mx-2 my-1 py-1 px-3 ">
@@ -55,6 +57,14 @@
             <span v-show="no_notif" class="mx-2 my-1 py-1 px-3 ">
                 <p>tidak ada notifikasi</p>
             </span>
+            <!-- <span class="bg-blue-600 hover:bg-blue-400 mx-2 my-1 pt-1 pl-3 rounded-lg shadow-lg ">
+                <router-link :to="{name:'order' ,params: {id:'62b14f568b2168c8ccc58d7b'}}"  class="text-white no-underline">
+                    <h4>notifikasi dummy</h4> 
+                    <p> buat ngetes </p>
+                </router-link>
+                <span class="rounded-lg px-3 bg-green-600 "><i class="fas fa-check-circle"></i></span>
+                <button class="float-right rounded-lg px-3 bg-red-600 hover:bg-red-400"><i class="fas fa-minus-circle"></i></button>   
+            </span> -->
         </div>
     </div>
 </div>

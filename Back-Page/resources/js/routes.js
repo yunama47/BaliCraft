@@ -3,6 +3,7 @@ import create1 from './components/barangCreate.vue';
 import create2 from './components/pengrajinCreate.vue';
 import tabel1 from './components/barangTabel.vue';
 import tabel2 from './components/pengrajinTabel.vue';
+import order from './components/barangOrder.vue';
 
 export const routes = [{
         name: 'dasbor',
@@ -13,6 +14,11 @@ export const routes = [{
         name: 'barang',
         path: '/admin/barang',
         component: tabel1
+    },
+    {
+        name: 'order',
+        path: '/admin/order/:id',
+        component: order
     },
     {
         name: 'pengrajin',

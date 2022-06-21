@@ -114,9 +114,9 @@ export default {
         this.pesan.products = this.product
         axios
         .post("http://localhost:3000/keranjang/", this.pesan)
-        .then(() => {
+        .then((response) => {
           this.$router.push({ path: "/products" })
-          this.notifikasi()
+          this.notifikasi(response.data._id)
           // this.$toast.success("Pesanan Anda Berhasil Ditambahkan",{
           //   type: 'success',
           //   position: 'top',
@@ -146,11 +146,11 @@ export default {
         alert("Maaf, Anda Belum Mengisi Inputan Pemesanan")
       }      
     },
-    notifikasi(){
+    notifikasi(id_keranjang){
         const notif = {
           "judul": 'Pemesanan baru dari pembeli' ,
           "pesan": `Barang " ${this.product.nama_kerajinan} " dipesan sebanyak ${this.pesan.jumlah}`,
-          "link_ref": `http://www.google.com`,
+          "id_keranjang": id_keranjang,
           "read":false
         }
         axios.post('http://localhost:3000/notifikasi/',notif,{
