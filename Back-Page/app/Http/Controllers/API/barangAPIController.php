@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Storage;
 class barangAPIController extends Controller
 {
     private function generateLinkGambar($id){
-        return 'https://drive.google.com/uc?id='.$id.'&export=download';
+        // return 'https://drive.google.com/uc?id='.$id.'&export=download';
+        return 'https://drive.google.com/uc?id='.$id.'&export=media';
     }
     /**
      * Display a listing of the resource.

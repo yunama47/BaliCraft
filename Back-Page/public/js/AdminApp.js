@@ -5536,6 +5536,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       harga: '',
       keterangan: '',
       id_peng: '',
+      id_brg: '',
       gambar: '',
       link_gambar: '',
       list_bahan: [],
@@ -5579,7 +5580,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         bahan[x] = barangs[x].bahan;
       }
 
-      _this.list_bahan = _toConsumableArray(new Set(bahan));
+      _this.list_bahan = _toConsumableArray(new Set(bahan)); // unique bahan only
     });
 
     if (this.$route.params.id) {
@@ -5590,6 +5591,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         _this.harga = response.data.barang.harga;
         _this.keterangan = response.data.barang.keterangan;
         _this.id_peng = response.data.barang.id_peng;
+        _this.id_brg = response.data.barang.id_brg;
         _this.gambar = response.data.barang.gambar;
         _this.link_gambar = response.data.barang.link_gambar;
       });
@@ -5603,6 +5605,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.gambar = e.target.files[0]; // }else{
       // }
     },
+    imageView: function imageView(link, alt) {
+      this.$swal.fire({
+        title: 'Preview Gambar Barang',
+        imageUrl: link,
+        imageAlt: alt
+      });
+    },
     saveData: function saveData(e) {
       var _this2 = this;
 
@@ -5614,9 +5623,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       formData.append('keterangan', this.keterangan);
       formData.append('id_peng', this.id_peng);
       formData.append('gambar', this.gambar);
-      formData.append('link_gambar', this.link_gambar); // edit data 
+      formData.append('link_gambar', this.link_gambar);
+      this.$swal.showLoading(); // edit data 
 
       if (this.$route.params.id) {
+        formData.append('id_brg', this.id_brg);
         this.axios.post('/api/barang/' + this.$route.params.id, formData, {
           headers: {
             'content-type': 'multipart/form-data'
@@ -5637,7 +5648,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           _this2.allerros = error.response.data.errors;
           _this2.success = false;
         })["finally"](function () {
-          return _this2.loading = false;
+          _this2.loading = false;
+
+          _this2.$swal.hideLoading();
         });
       } // membuat data baru 
       else {
@@ -5661,7 +5674,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           _this2.allerros = error.response.data.errors;
           _this2.success = false;
         })["finally"](function () {
-          return _this2.loading = false;
+          _this2.loading = false;
+
+          _this2.$swal.hideLoading();
         });
       }
     }
@@ -5681,6 +5696,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
 //
 //
 //
@@ -5779,6 +5798,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     searchData: function searchData(e) {
       this.table();
+    },
+    imageView: function imageView(link, alt) {
+      this.$swal.fire({
+        title: 'Preview Gambar Barang',
+        imageUrl: link,
+        imageAlt: alt
+      });
     },
     deleteData: function deleteData(id) {
       var _this2 = this;
@@ -30919,15 +30945,24 @@ var render = function () {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.gambar
+                  _vm.link_gambar
                     ? _c("div", { staticClass: "flex flex-col" }, [
                         _c("p", [_vm._v("Gambar saat ini :")]),
                         _vm._v(" "),
                         _c("img", {
+                          staticClass: "shadow-md rounded ml-5",
                           attrs: {
                             width: "200",
                             height: "250",
                             src: _vm.link_gambar,
+                          },
+                          on: {
+                            click: function ($event) {
+                              return _vm.imageView(
+                                _vm.link_gambar,
+                                _vm.nama_barang
+                              )
+                            },
                           },
                         }),
                       ])
@@ -31157,6 +31192,23 @@ var render = function () {
                     { staticClass: "flex" },
                     [
                       _c(
+                        "button",
+                        {
+                          staticClass:
+                            "w-1/2 bg-green-600 text-white font-semibold p-1 m-1 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 hover:text-black flex items-center justify-center",
+                          on: {
+                            click: function ($event) {
+                              return _vm.imageView(
+                                b.link_gambar,
+                                b.nama_kerajinan
+                              )
+                            },
+                          },
+                        },
+                        [_c("i", { staticClass: "fas fa-image" })]
+                      ),
+                      _vm._v(" "),
+                      _c(
                         "router-link",
                         {
                           staticClass:
@@ -31168,11 +31220,7 @@ var render = function () {
                             },
                           },
                         },
-                        [
-                          _vm._v(
-                            "\r\n                                    Edit\r\n                                    "
-                          ),
-                        ]
+                        [_c("i", { staticClass: "fas fa-edit" })]
                       ),
                       _vm._v(" "),
                       _c(
@@ -31186,7 +31234,7 @@ var render = function () {
                             },
                           },
                         },
-                        [_vm._v("\r\n                                    Del")]
+                        [_c("i", { staticClass: "fas fa-backspace" })]
                       ),
                     ],
                     1

@@ -16,6 +16,10 @@ const Keranjang = mongoose.Schema({
     no_telp:{
         type: String,
         require: true
+    },
+    products:{
+        type : Object,
+        require: true
     }
 },{
     timestamps: true

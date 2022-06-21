@@ -57,9 +57,9 @@
                             <label class=" text-sm text-gray-800" >Gambar Kerajinan</label>
                             <input class="w-full py-1 text-gray-700 bg-white rounded" v-on:change="onFileChange" type="file">
                             <span v-if="allerros.gambar" class="text-sm text-red-600">{{ allerros.gambar[0] }}</span>
-                            <div v-if="gambar" class="flex flex-col">
+                            <div v-if="link_gambar" class="flex flex-col">
                                 <p>Gambar saat ini :</p>
-                                <img width="200" height="250" :src="link_gambar"/>
+                                <img @click="imageView(link_gambar,nama_barang)" class="shadow-md rounded ml-5" width="200" height="250" :src="link_gambar"/>
                             </div>
                         </div>
                     </div>
@@ -89,6 +89,7 @@ export default {
         harga:'',
         keterangan:'',
         id_peng:'',
+        id_brg:'',
         gambar:'',
         link_gambar:'',
         list_bahan:[],
@@ -138,7 +139,7 @@ export default {
             for (let x = 0; x < barangs.length; x++){
                 bahan[x] = barangs[x].bahan
             }
-            this.list_bahan = [... new Set(bahan)]
+            this.list_bahan = [... new Set(bahan)] // unique bahan only
         });
 
         if (this.$route.params.id) {
@@ -151,6 +152,7 @@ export default {
                 this.harga = response.data.barang.harga;
                 this.keterangan = response.data.barang.keterangan;
                 this.id_peng = response.data.barang.id_peng;
+                this.id_brg = response.data.barang.id_brg;
                 this.gambar = response.data.barang.gambar;
                 this.link_gambar = response.data.barang.link_gambar;
             });
@@ -167,6 +169,13 @@ export default {
             // }else{
             // }
         },
+        imageView(link,alt){
+            this.$swal.fire({
+                title: 'Preview Gambar Barang',
+                imageUrl: link,
+                imageAlt: alt
+            })
+        },
         saveData(e) {
             e.preventDefault();
             let formData = new FormData();
@@ -177,9 +186,10 @@ export default {
             formData.append('id_peng', this.id_peng);
             formData.append('gambar', this.gambar);
             formData.append('link_gambar', this.link_gambar);
-
+            this.$swal.showLoading()
             // edit data 
             if (this.$route.params.id) {
+                formData.append('id_brg',this.id_brg)
                 this.axios.post('/api/barang/'+this.$route.params.id, formData,{
                     headers: {
                         'content-type': 'multipart/form-data'
@@ -199,7 +209,10 @@ export default {
                     this.allerros = error.response.data.errors;
                     this.success = false;
                 })
-                .finally(() => this.loading = false);
+                .finally(() => {
+                    this.loading = false
+                    this.$swal.hideLoading()
+                });
             }
             // membuat data baru 
             else {
@@ -220,7 +233,8 @@ export default {
                     this.allerros = error.response.data.errors;
                     this.success = false;
                 })
-                .finally(() => this.loading = false);
+                .finally(() =>{ this.loading = false
+                this.$swal.hideLoading()});
             }
         }
     }

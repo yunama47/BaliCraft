@@ -56,11 +56,15 @@
                         <td class=" px-4 py-3 text-center">
                             <!-- <form action="{{}}" method="POST"> -->
                                 <div class="flex">
+                                    <button @click="imageView(b.link_gambar,b.nama_kerajinan)" class="w-1/2 bg-green-600 text-white font-semibold p-1 m-1 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 hover:text-black flex items-center justify-center" >
+                                        <i class="fas fa-image"></i>
+                                    </button>
                                     <router-link :to="{name:'barang.edit',params: { id: b.id_brg }}" class="w-1/2 no-underline bg-blue-600 text-white font-semibold p-1 m-1 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 hover:text-black flex items-center justify-center">
-                                    Edit
+                                        <i class="fas fa-edit"></i>
                                     </router-link>
                                     <button @click="deleteData(b.id_brg)" class="w-1/2 bg-red-600 text-white font-semibold p-1 m-1 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 hover:text-black flex items-center justify-center" >
-                                    Del</button>
+                                    <i class="fas fa-backspace"></i>
+                                    </button>
                                 </div>
                             <!-- </form> -->
                         </td>
@@ -96,7 +100,14 @@ export default {
             });
         },
         searchData(e){
-        this.table();
+            this.table();
+        },
+        imageView(link,alt){
+            this.$swal.fire({
+                title: 'Preview Gambar Barang',
+                imageUrl: link,
+                imageAlt: alt
+            })
         },
         deleteData(id) {
             this

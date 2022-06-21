@@ -7,20 +7,23 @@
 }
 
 .btn-success {
-    background-color: #4EB883;
+    background-color: orange;
 }
 
 .badge-success {
-    background-color: #4EB883;
+    background-color: orange;
 }
 
-.cart-product {
-    border-radius: 15px;
+body {
+    background-color: rgb(208, 172, 104);
+}
+
+.card-product {
+    border-radius: 50px;
 }
 
 .card-img-top {
-    border-top-right-radius: 15px;
-    border-top-left-radius: 15px;
+    border-radius: 50px;
 }
 
 .breadcrumb {
@@ -36,9 +39,3 @@
 .img-fluid {
     border-radius: 15px;
 }
-
-.img {
-    border-radius: 10%;
-}
-
-

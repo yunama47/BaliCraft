@@ -3,19 +3,19 @@
     <Navbar />
     <div class="container">
       <Hero />
-
       <div class="row mt-4">
         <div class="col">
-          <h2>Product <strong>Terlaris</strong></h2>
+          <h2><hr /></h2>
         </div>
         <div class="col">
-          <router-link to="/product" class="btn btn-success float-right"
-            ><b-icon-eye></b-icon-eye>Lihat Semua</router-link
-          >
+          <router-link to="/products" class="btn btn-success float-right">
+            Lihat Semua Products
+          </router-link>
         </div>
       </div>
-
-      <div class="row mb-4">
+      <hr>
+      
+      <div class="row mb-3">
         <div class="col-md-3 mt-4" v-for="product in products" :key="product.id">
           <CardProduct :product="product"/>
         </div>
@@ -32,7 +32,7 @@ import CardProduct from "@/components/CardProduct.vue";
 import axios from "axios";
 
 export default {
-  name: "Home",
+  name: "HomeView",
   components: {
     Navbar,
     Hero,

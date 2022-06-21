@@ -4,35 +4,31 @@
     <div class="container">
       <div class="row mt-4">
         <div class="col">
-          <h2>Daftar <strong>Product</strong></h2>
+          <h2>Daftar Products</h2>
         </div>
       </div>
 
       <div class="row mt-3">
         <div class="col">
-          <div class="input-group mb-3" style="padding-left: 400px; padding-right: 400px">
-           
-            <input
-            v-model="search"
-              
+          <div class="input-group mb-3">
+            
+            <input style="margin-left: 500px;"
+              v-model="search"
               type="text"
               class="form-control"
-              placeholder="Cari Product"
-              aria-label="Cari Product"
+              placeholder="Ketikan nama barang yang ingin kamu cari :D"
+              aria-label="Cari"
               aria-describedby="basic-addon1"
               @keyup="searchProduct"
             />
 
-             <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">
-                <b-icon-search></b-icon-search>
-              </span>
-            </div>
+            <span class="input-group-text" id="basic-addon1"><b-icon-search></b-icon-search></span>
+
           </div>
         </div>
       </div>
 
-      <div class="row mb-4">
+      <div class="row mb-3">
         <div
           class="col-md-3 mt-4"
           v-for="product in products"
@@ -52,7 +48,7 @@ import CardProduct from "@/components/CardProduct.vue";
 import axios from "axios";
 
 export default {
-  name: "Product",
+  name: "ProductsView",
   components: {
     Navbar,
     CardProduct,
@@ -81,7 +77,7 @@ export default {
       .catch((error) => console.log(error));
   },
 };
-Navbar;
 </script>
+
 <style>
 </style>

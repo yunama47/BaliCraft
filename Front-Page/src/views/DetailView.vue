@@ -11,8 +11,8 @@
                 <router-link to="/" class="text-dark">Home</router-link>
               </li>
               <li class="breadcrumb-item">
-                <router-link to="/product" class="text-dark"
-                  >Product</router-link
+                <router-link to="/products" class="text-dark"
+                  >Products</router-link
                 >
               </li>
               <li class="breadcrumb-item active" aria-current="page">
@@ -109,19 +109,20 @@ export default {
       this.product = data;
     },
     pemesanan() {
-      if(this.pesan.jumlah && this.pesan.alamat && this.pesan.no_telp)  {
+      if(this.pesan.jumlah && this.pesan.alamat && this.pesan.no_telp){
         this.pesan.id_brg = this.product.id_brg;
-      axios
+        this.pesan.products = this.product
+        axios
         .post("http://localhost:3000/keranjang/", this.pesan)
         .then(() => {
-          this.$router.push({ path: "/product" })
-          this.$toast.success("Pesanan Anda Berhasil Ditambahkan",{
-            type: 'success',
-            position: 'top',
-            duration: '5000',
-            dismissible: true
-          });
+          this.$router.push({ path: "/products" })
           this.notifikasi()
+          // this.$toast.success("Pesanan Anda Berhasil Ditambahkan",{
+          //   type: 'success',
+          //   position: 'top',
+          //   duration: '5000',
+          //   dismissible: true
+          // });
         })
         .catch((err) => console.log(err))
 
@@ -136,25 +137,26 @@ export default {
       //   this.notifikasi()
       // //===============================================================
       }else {
-        this.$toast.error("Maaf, Anda Belum Mengisi Inputan Pemesanan",{
-            type: 'error',
-            position: 'top',
-            duration: '5000',
-            dismissible: true
-          });
+        // this.$toast.error("Maaf, Anda Belum Mengisi Inputan Pemesanan",{
+        //     type: 'error',
+        //     position: 'top',
+        //     duration: '5000',
+        //     dismissible: true
+        //   });
+        alert("Maaf, Anda Belum Mengisi Inputan Pemesanan")
       }      
     },
     notifikasi(){
         const notif = {
           "judul": 'Pemesanan baru dari pembeli' ,
-          "pesan": `Barang "${this.product.nama_kerajinan}"" dipesan sebanyak ${this.pesan.jumlah}`,
-          "link_ref": `http://localhost:8080/product/${this.product.id_brg}`,
+          "pesan": `Barang " ${this.product.nama_kerajinan} " dipesan sebanyak ${this.pesan.jumlah}`,
+          "link_ref": `http://www.google.com`,
           "read":false
         }
         axios.post('http://localhost:3000/notifikasi/',notif,{
           headers:{'content-type':'application/json','accept':'application/json'}
           })
-          .then(function (response) {
+          .then(()=> {
             // handle success
             console.log("Notifikasi Berhasil");
           })

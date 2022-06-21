@@ -1,4 +1,4 @@
-# FrontPage 
+# balicraft
 
 ## Project setup
 ```
